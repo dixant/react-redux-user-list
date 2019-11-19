@@ -1,24 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch, Route
+} from 'react-router-dom';
+import UserList from './components/UserList';
+import FavouriteUserList from './components/FavouriteUserList';
+
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>
+          React Redux User List Application
+        </h1>
       </header>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={UserList} />
+          <Route path="/favourites" component={FavouriteUserList} />
+        </Switch>
+      </Router>
     </div>
   );
 }
