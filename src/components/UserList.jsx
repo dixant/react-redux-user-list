@@ -14,16 +14,17 @@ class UserList extends React.Component {
         super(props);
     }
     componentDidMount() {
+        if(this.props.users.length < 1){
+            this.props.dispatch(fetchUsers());
+        }
         this.refs.userScroll.addEventListener("scroll", this.onScrollCall);
-        this.props.dispatch(fetchUsers());
+        
     }
     componentWillUnmount() {
         this.refs.userScroll.removeEventListener("scroll", throttle(this.onScrollCall, 1000));
     }
     onScrollCall = () => {
         if (this.refs.userScroll.scrollTop + this.refs.userScroll.clientHeight >= this.refs.userScroll.scrollHeight && this.props.hasMore && !this.props.isLoading) {
-            // this.loadUsers(this.state.userId);
-            console.log(" onscroll called ");
             this.props.dispatch(fetchUsers(parseInt(this.props.userId) + 1));
         }
     }
@@ -44,7 +45,7 @@ class UserList extends React.Component {
                                 <td>{data.userId}</td>
                                 <td>{data.title}</td>
                                 <td>{data.body}</td>
-                                <td><FavouriteToggle isFavourite={data.isFavourite} /></td>
+                                <td><FavouriteToggle userData = {data}  /></td>
                             </tr>
                         </tbody>
                     )) : null}
