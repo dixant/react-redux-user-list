@@ -1,71 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import FavouriteToggle from './FavouriteToggle';
 import { throttle } from 'lodash';
 
+import { connect } from "react-redux";
+import { fetchUsers } from "../store/actions/index";
+
+import FavouriteToggle from './FavouriteToggle';
+
+
 class UserList extends React.Component {
+    // eslint-disable-next-line no-useless-constructor
     constructor(props) {
         super(props);
-        this.state = {
-            error: false,
-            hasMore: true,
-            userId: 1,
-            isLoading: false,
-            users: []
-        };
     }
-    loadUsers = (userId) => {
-        this.setState({ isLoading: true }, () => {
-            setTimeout(() => {
-                fetch(`http://localhost:3000/posts?userId=${userId}`)
-                    .then(res => res.json())
-                    .then(
-                        (result) => {
-                            const nextUser = result.map(data => ({
-                                userId: data.userId,
-                                id: data.id,
-                                isFavourite: data.isFavourite,
-                                title: data.title,
-                                body: data.body,
-                            }));
-                            if (nextUser.length > 0) {
-                                this.setState({
-                                    hasMore: (this.state.userId < 11),
-                                    isLoading: false,
-                                    userId: parseInt(nextUser[0].userId) + 1,
-                                    users: [...this.state.users, ...nextUser],
-                                });
-                            }
-                            else {
-                                this.setState({
-                                    isLoading: false
-                                })
-                            }
-
-                        },
-                        (error) => { this.setState({ isLoading: false, error: true }) }
-                    )
-            }, 2000);
-        })
-    }
-
     componentDidMount() {
-        if (this.state.userId == 1) { this.loadUsers(this.state.userId) }
         this.refs.userScroll.addEventListener("scroll", this.onScrollCall);
+        this.props.dispatch(fetchUsers());
     }
     componentWillUnmount() {
         this.refs.userScroll.removeEventListener("scroll", throttle(this.onScrollCall, 1000));
     }
     onScrollCall = () => {
-        if (this.refs.userScroll.scrollTop + this.refs.userScroll.clientHeight >= this.refs.userScroll.scrollHeight && this.state.hasMore) {
-            this.loadUsers(this.state.userId);
+        if (this.refs.userScroll.scrollTop + this.refs.userScroll.clientHeight >= this.refs.userScroll.scrollHeight && this.props.hasMore && !this.props.isLoading) {
+            // this.loadUsers(this.state.userId);
+            console.log(" onscroll called ");
+            this.props.dispatch(fetchUsers(parseInt(this.props.userId) + 1));
         }
     }
     handleFavourite(e) {
         console.log(e.target);
     }
     render() {
-        const { error, hasMore, isLoading, users } = this.state;
+        const { error, hasMore, isLoading, users } = this.props;
         return (
             <div id="user-scroll-view" ref="userScroll">
                 <Link to="/favourites">Favourites User List</Link>
@@ -92,4 +58,17 @@ class UserList extends React.Component {
         )
     }
 }
-export default UserList;
+
+
+const mapStateToProps = state => {
+    return ({
+        users: state.users.users || [],
+        isLoading: state.users.isLoading,
+        error: state.users.error,
+        hasMore: state.users.hasMore,
+        userId: state.users.userId
+    });
+}
+
+export default connect(mapStateToProps)(UserList);
+

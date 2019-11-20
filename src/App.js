@@ -7,7 +7,7 @@ import UserList from './components/UserList';
 import FavouriteUserList from './components/FavouriteUserList';
 
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -15,10 +15,14 @@ function App() {
           React Redux User List Application
         </h1>
       </header>
-      <Router>
+      <Router >
         <Switch>
-          <Route exact path="/" component={UserList} />
-          <Route path="/favourites" component={FavouriteUserList} />
+          <Route exact path="/" >
+            <UserList />
+          </Route>
+          <Route path="/favourites" >
+            <FavouriteUserList />
+          </Route>
         </Switch>
       </Router>
     </div>
