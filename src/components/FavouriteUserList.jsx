@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
-
 import { fetchFavouriteUsers, addToFavorite } from "../store/actions/index";
 import FavouriteToggle from './FavouriteToggle';
 
@@ -19,7 +18,6 @@ class FavouriteUserList extends React.Component {
     handleFavourite(id, user) {
         this.props.dispatch(addToFavorite(id, user));
     }
-
     render() {
         const { error, isLoading, favUsers } = this.props;
         return (
@@ -54,5 +52,4 @@ const mapStateToProps = state => {
         error: state.favUsers.error
     });
 }
-
 export default connect(mapStateToProps)(FavouriteUserList);

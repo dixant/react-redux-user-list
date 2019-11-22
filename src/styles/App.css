@@ -98,17 +98,14 @@ input:checked+.slider:before {
 #user-scroll-view::-webkit-scrollbar {
   display: none;
 }
-
-/* Hide scrollbar for IE and Edge */
-#user-scroll-view {
-  -ms-overflow-style: none;
-}
-
 body::-webkit-scrollbar {
   display: none;
 }
 
 /* Hide scrollbar for IE and Edge */
+#user-scroll-view {
+  -ms-overflow-style: none;
+}
 body {
   -ms-overflow-style: none;
 }

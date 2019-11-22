@@ -1,9 +1,4 @@
-import {
-  FETCH_USERS_BEGIN,
-  FETCH_USERS_SUCCESS,
-  FETCH_USERS_FAILURE,
-  PUT_USERS_SUCCESS
-} from '../actions/index';
+import ActionConstant from '../../constants/action.constant';
 
 const initialState = {
   users: [],
@@ -14,7 +9,7 @@ const initialState = {
 };
 
 export default function userReducer(state = initialState, action) {
-
+  let { FETCH_USERS_BEGIN, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE, PUT_USERS_SUCCESS } = ActionConstant;
   switch (action.type) {
     case FETCH_USERS_BEGIN:
       return {

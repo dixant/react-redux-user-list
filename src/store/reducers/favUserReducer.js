@@ -1,11 +1,4 @@
-import {
-    FETCH_FAVOURITE_USERS_BEGIN,
-    FETCH_FAVOURITE_USERS_SUCCESS,
-    FETCH_FAVOURITE_USERS_FAILURE,
-    PUT_FAVOURITE_USERS_SUCCESS,
-    ADD_FAVOURITE_USERS_SUCCESS,
-
-} from '../actions/index';
+import ActionConstant from '../../constants/action.constant';
 
 
 const initialState = {
@@ -15,7 +8,8 @@ const initialState = {
 };
 
 export default function favUserReducer(state = initialState, action) {
-
+    let { FETCH_FAVOURITE_USERS_BEGIN, FETCH_FAVOURITE_USERS_SUCCESS, FETCH_FAVOURITE_USERS_FAILURE,
+        PUT_FAVOURITE_USERS_SUCCESS, ADD_FAVOURITE_USERS_SUCCESS } = ActionConstant;
     switch (action.type) {
         case FETCH_FAVOURITE_USERS_BEGIN:
             return {

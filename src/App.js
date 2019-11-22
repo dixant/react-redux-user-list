@@ -23,6 +23,7 @@ const App = () => {
           <Route path="/favourites" >
             <FavouriteUserList />
           </Route>
+          <Route><UserList/></Route>
         </Switch>
       </Router>
     </div>

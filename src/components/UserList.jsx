@@ -1,12 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { throttle } from 'lodash';
-
 import { connect } from "react-redux";
 import { fetchUsers, addToFavorite } from "../store/actions/index";
-
 import FavouriteToggle from './FavouriteToggle';
-
 
 class UserList extends React.Component {
     // eslint-disable-next-line no-useless-constructor
@@ -19,10 +15,9 @@ class UserList extends React.Component {
             this.props.dispatch(fetchUsers());
         }
         this.refs.userScroll.addEventListener("scroll", this.onScrollCall);
-
     }
     componentWillUnmount() {
-        this.refs.userScroll.removeEventListener("scroll", throttle(this.onScrollCall, 1000));
+        this.refs.userScroll.removeEventListener("scroll", this.onScrollCall);
     }
     onScrollCall = () => {
         if (this.refs.userScroll.scrollTop + this.refs.userScroll.clientHeight >= this.refs.userScroll.scrollHeight && this.props.hasMore && !this.props.isLoading) {
@@ -65,8 +60,6 @@ class UserList extends React.Component {
         )
     }
 }
-
-
 const mapStateToProps = state => {
     return ({
         users: state.users.users || [],
@@ -76,6 +69,5 @@ const mapStateToProps = state => {
         userId: state.users.userId
     });
 }
-
 export default connect(mapStateToProps)(UserList);
 
