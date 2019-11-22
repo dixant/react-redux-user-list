@@ -4,8 +4,13 @@ export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE';
 export const FETCH_FAVOURITE_USERS_BEGIN = 'FETCH_FAVOURITE_USERS_BEGIN';
 export const FETCH_FAVOURITE_USERS_SUCCESS = 'FETCH_FAVOURITE_USERS_SUCCESS';
+
+
 export const FETCH_FAVOURITE_USERS_FAILURE = 'FETCH_FAVOURITE_USERS_FAILURE';
 export const PUT_FAVOURITE_USERS_SUCCESS = 'PUT_FAVOURITE_USERS_SUCCESS';
+export const PUT_USERS_SUCCESS = 'PUT_USERS_SUCCESS';
+export const ADD_FAVOURITE_USERS_SUCCESS = 'ADD_FAVOURITE_USERS_SUCCESS';
+
 export const ADD_FAV = 'ADD_FAV';
 export const REMOVE_FAV = 'REMOVE_FAV';
 
@@ -47,20 +52,25 @@ export const addToFavorite = (id, body) => {
 		body: body
 	  });
 
-	return dispatch => {
-	//dispatch(fetchFavouriteUsersBegin());
-
+	 return dispatch => {
 
 	return fetch(myRequest)
-		.then(res => res.json())
+		.then(res => {
+			 return res.json()})
 		.then(json => {
-			console.log("json: ", json)
-			setTimeout(() => {
+			if(json.isFavourite){
+				//add new data to favUsers
+				dispatch(addFavouriteUsersSuccess(json));
+			}
+			else{
 				dispatch(PUTFavouriteUsersSuccess(json));
-			}, 3000)
+			}
+			
+			dispatch(PUTUsersSuccess(json));
+			return true;	
 		})
-		.catch(error => null);
-	};
+		.catch(error => false);
+	 };
 }
 
 export function addToFavorite1(user) {
@@ -103,6 +113,9 @@ export const fetchFavouriteUsersSuccess = (favUsers) => ({
 	payload: { favUsers }
 });
 
+
+
+
 export const fetchFavouriteUsersFailure = error => ({
 	type: FETCH_FAVOURITE_USERS_FAILURE,
 	payload: { error }
@@ -111,8 +124,17 @@ export const PUTFavouriteUsersSuccess = (user) => ({
 	type: PUT_FAVOURITE_USERS_SUCCESS,
 	payload: { user }
 });
+export const addFavouriteUsersSuccess = (user) => ({
+	type: ADD_FAVOURITE_USERS_SUCCESS,
+	payload: { user }
+});
 
 export const PUTFavouriteUsersFailure = error => ({
 	type: FETCH_FAVOURITE_USERS_FAILURE,
 	payload: { error }
 })
+
+export const PUTUsersSuccess = (user) => ({
+	type: PUT_USERS_SUCCESS,
+	payload: { user }
+});

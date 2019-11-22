@@ -1,22 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import { fetchFavouriteUsers } from "../store/actions/index";
+
+import { fetchFavouriteUsers, addToFavorite } from "../store/actions/index";
 import FavouriteToggle from './FavouriteToggle';
 
 class FavouriteUserList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.handleFavourite = this.handleFavourite.bind(this);
     }
     componentDidMount() {
         if (this.props.favUsers.length < 1) {
             this.props.dispatch(fetchFavouriteUsers());
         }
-        //this.refs.userScroll.addEventListener("scroll", this.onScrollCall);
-
     }
-    render() {console.log(this.props)
+    handleFavourite(id, user) {
+        this.props.dispatch(addToFavorite(id, user));
+    }
+
+    render() {
         const { error, isLoading, favUsers } = this.props;
         return (
             <div>
@@ -30,7 +34,7 @@ class FavouriteUserList extends React.Component {
                                 <td>{data.userId}</td>
                                 <td>{data.title}</td>
                                 <td>{data.body}</td>
-                                <td><FavouriteToggle userData = {data}  /></td>
+                                <td><FavouriteToggle onChange={this.handleFavourite} userData={data} /></td>
                             </tr>
                         </tbody>
                     )) : null}

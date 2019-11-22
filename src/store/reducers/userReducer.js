@@ -2,14 +2,11 @@ import {
   FETCH_USERS_BEGIN,
   FETCH_USERS_SUCCESS,
   FETCH_USERS_FAILURE,
-  FETCH_FAVOURITE_USERS_BEGIN,
-  FETCH_FAVOURITE_USERS_SUCCESS,
-  FETCH_FAVOURITE_USERS_FAILURE,
+  PUT_USERS_SUCCESS
 } from '../actions/index';
 
 const initialState = {
   users: [],
-  favUsers: [],
   isLoading: false,
   error: null,
   hasMore: true,
@@ -42,27 +39,19 @@ export default function userReducer(state = initialState, action) {
         error: action.payload.error,
         users: []
       };
-    case FETCH_FAVOURITE_USERS_BEGIN:
-      return {
-        ...state,
-        isLoading: true,
-        error: null
-      };
 
-    case FETCH_FAVOURITE_USERS_SUCCESS:
+    case PUT_USERS_SUCCESS:
+      let { id, isFavourite } = (action.payload || {}).user || {};
+      let users = state.users.map(itm => {
+        if (itm.id === id) {
+          itm.isFavourite = isFavourite;
+        }
+        return itm;
+      });
       return {
         ...state,
-        isLoading: false,
-        favUsers: [ ...action.payload.favUsers]
-      };
-
-    case FETCH_FAVOURITE_USERS_FAILURE:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload.error,
-        favUsers: []
-      };
+        users: users || []
+      }
 
     default:
       // ALWAYS have a default case in a reducer
