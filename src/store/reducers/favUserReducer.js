@@ -18,10 +18,17 @@ export default function favUserReducer(state = initialState, action) {
                 error: null
             };
         case FETCH_FAVOURITE_USERS_SUCCESS:
+            let favData = [];
+            if([...state.favUsers].length < [...action.payload.favUsers].length){
+                favData = [...action.payload.favUsers];
+            }
+            else{
+                favData = [...state.favUsers]
+            }
             return {
                 ...state,
                 isLoading: false,
-                favUsers: [...action.payload.favUsers]
+                favUsers: favData
             };
         case FETCH_FAVOURITE_USERS_FAILURE:
             return {
@@ -39,9 +46,12 @@ export default function favUserReducer(state = initialState, action) {
                 favUsers: favList || []
             };
         case ADD_FAVOURITE_USERS_SUCCESS:
+            let updatedFavUsers = [...state.favUsers, ...[action.payload.user]].sort ( (a,b) => {
+                return a.id - b.id;
+            });
             return {
                 ...state,
-                favUsers: [...state.favUsers, ...[action.payload.user]] || []
+                favUsers: updatedFavUsers || []
             };
         default:
             // ALWAYS have a default case in a reducer

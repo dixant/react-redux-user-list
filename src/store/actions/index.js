@@ -21,7 +21,6 @@ export const fetchFavouriteUsers = () => {
 		return fetch(`http://localhost:3000/posts?isFavourite=true`)
 			.then(res => res.json())
 			.then(json => {
-				console.log("json: ", json)
 				setTimeout(() => {
 					dispatch(fetchFavouriteUsersSuccess(json));
 				}, 3000)

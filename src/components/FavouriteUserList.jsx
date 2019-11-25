@@ -11,9 +11,7 @@ class FavouriteUserList extends React.Component {
         this.handleFavourite = this.handleFavourite.bind(this);
     }
     componentDidMount() {
-        if (this.props.favUsers.length < 1) {
             this.props.dispatch(fetchFavouriteUsers());
-        }
     }
     handleFavourite(id, user) {
         this.props.dispatch(addToFavorite(id, user));
@@ -24,8 +22,8 @@ class FavouriteUserList extends React.Component {
             <div>
                 <Link to="/">User List</Link>
                 <table className="user-list">
-                    {favUsers.length > 0 ? <thead><tr><th>Id</th><th>UId</th><th>Title</th><th>Body</th><th>Favourite</th></tr></thead> : null}
-                    {favUsers.length > 0 ? favUsers.map((data, index) => (
+                    {favUsers && favUsers.length > 0 ? <thead><tr><th>Id</th><th>UId</th><th>Title</th><th>Body</th><th>Favourite</th></tr></thead> : null}
+                    {favUsers && favUsers.length > 0 ? favUsers.map((data, index) => (
                         <tbody key={index} id={data.id} className="user-list-item">
                             <tr>
                                 <td>{data.id}</td>
