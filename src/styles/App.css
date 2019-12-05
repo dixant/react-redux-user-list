@@ -13,9 +13,6 @@ code {
     monospace;
 }
 
-.App {
-  text-align: center;
-}
 
 .App-header {
   background-color: #282c34;
@@ -24,7 +21,6 @@ code {
   z-index: 1;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
 
@@ -32,6 +28,7 @@ code {
   background: #282c34;
   margin: 0;
   padding: 24px;
+  display: inline-block;
 }
 
 .switch {
@@ -98,6 +95,7 @@ input:checked+.slider:before {
 #user-scroll-view::-webkit-scrollbar {
   display: none;
 }
+
 body::-webkit-scrollbar {
   display: none;
 }
@@ -106,13 +104,16 @@ body::-webkit-scrollbar {
 #user-scroll-view {
   -ms-overflow-style: none;
 }
+
 body {
   -ms-overflow-style: none;
 }
 
 #user-scroll-view {
   height: 80vh;
+  width: 100%;
   overflow: auto;
+  transition: max-height 5s ease-in-out;
 }
 
 .loading-container {
@@ -140,4 +141,75 @@ table {
   box-sizing: border-box;
   list-style: none;
   text-align: left;
+}
+
+nav {
+  display: inline-block;
+}
+
+.nav {
+  color: #fff;
+  float: right;
+  padding: 24px;
+
+}
+
+.active-nav {
+  color: #2196f3;
+}
+
+.navbar {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: .5rem 1rem;
+  font-family: sans-serif;
+  background: #282c34;
+}
+
+.navbar-brand {
+  display: inline-block;
+  padding-top: .3125rem;
+  padding-bottom: .3125rem;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-collapse {
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -ms-flex-preferred-size: auto;
+  flex-basis: auto;
+}
+
+.navbar-nav {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+  flex-direction: row;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 1rem;
+  transition: all ease-in-out .2s;
+}
+
+.nav-link:hover+.dropdown-menu {
+  display: flex;
 }

@@ -1,9 +1,11 @@
 import Constant from '../../constants/action.constant';
+import NetworkConstant from '../../constants/network.constant';
 
+let {baseURL} = NetworkConstant;
 export const fetchUsers = (userId = 1) => {
 	return dispatch => {
 		dispatch(fetchUsersBegin());
-		return fetch(`http://localhost:3000/posts?userId=${userId}`)
+		return fetch(`${baseURL}posts?userId=${userId}`)
 			.then(res => res.json())
 			.then(json => {
 				let Id = json.length && json[0].userId,
@@ -18,7 +20,7 @@ export const fetchUsers = (userId = 1) => {
 export const fetchFavouriteUsers = () => {
 	return dispatch => {
 		dispatch(fetchFavouriteUsersBegin());
-		return fetch(`http://localhost:3000/posts?isFavourite=true`)
+		return fetch(`${baseURL}posts?isFavourite=true`)
 			.then(res => res.json())
 			.then(json => {
 				setTimeout(() => {
@@ -31,7 +33,7 @@ export const fetchFavouriteUsers = () => {
 
 export const addToFavorite = (id, body) => {
 	body = JSON.stringify(body);
-	let myRequest = new Request(`http://localhost:3000/posts/${id}`, {
+	let myRequest = new Request(`${baseURL}posts/${id}`, {
 		headers: { "Content-Type": "application/json; charset=utf-8" },
 		method: 'PUT',
 		body: body
