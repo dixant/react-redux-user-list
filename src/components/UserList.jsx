@@ -36,8 +36,8 @@ class UserList extends React.Component {
         const { error, hasMore, isLoading, users } = this.props;
         return (
             <div id="user-scroll-view" ref="userScroll">
-                <Link to="/favourites">Favourites User List</Link>
                 <table className="user-list">
+                    {users.length > 0 ? <caption>User List</caption> : null}
                     {users.length > 0 ? <thead><tr><th>Id</th><th>UId</th><th>Title</th><th>Body</th><th>Favourite</th></tr></thead> : null}
                     {users.length > 0 ? users.map((data, index) => (
                         <tbody key={index} id={data.id} className="user-list-item">

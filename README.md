@@ -19,7 +19,7 @@ This is a sample project which have following functionalities:
 
 In the project directory, you can run:
 
-### `json-server --watch db.json`
+### `npm run json:server`
 
 Runs the Json Server to mock the APIs
 Runs on port 3000 by default
@@ -27,6 +27,5 @@ Runs on port 3000 by default
 ### `npm start`
 
 Runs the app in the development mode.<br />
-Choose differnet port as 3000 is taken by the JSON Server.<br />
-Open [http://localhost:3001](http://localhost:3001) to view it in the browser.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
