@@ -3,7 +3,7 @@
     {
       "userId": 1,
       "id": 1,
-      "isFavourite": true,
+      "isFavourite": false,
       "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
       "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
     },
@@ -31,7 +31,7 @@
     {
       "userId": 1,
       "id": 5,
-      "isFavourite": false,
+      "isFavourite": true,
       "title": "nesciunt quas odio",
       "body": "repudiandae veniam quaerat sunt sed\nalias aut fugiat sit autem sed est\nvoluptatem omnis possimus esse voluptatibus quis\nest aut tenetur dolor neque"
     },
@@ -73,7 +73,7 @@
     {
       "userId": 2,
       "id": 11,
-      "isFavourite": false,
+      "isFavourite": true,
       "title": "et ea vero quia laudantium autem",
       "body": "delectus reiciendis molestiae occaecati non minima eveniet qui voluptatibus\naccusamus in eum beatae sit\nvel qui neque voluptates ut commodi qui incidunt\nut animi commodi"
     },

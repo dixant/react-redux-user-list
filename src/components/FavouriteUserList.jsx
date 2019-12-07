@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { fetchFavouriteUsers, addToFavorite } from "../store/actions/index";
 import FavouriteToggle from './FavouriteToggle';
+import { Container, Row, Col } from 'react-bootstrap';
 
 class FavouriteUserList extends React.Component {
     constructor(props) {
@@ -20,21 +20,31 @@ class FavouriteUserList extends React.Component {
         const { error, isLoading, favUsers } = this.props;
         return (
             <div>
-                <table className="user-list">
-                    {favUsers.length > 0 ? <caption>Favourite User List</caption> : null}
-                    {favUsers && favUsers.length > 0 ? <thead><tr><th>Id</th><th>UId</th><th>Title</th><th>Body</th><th>Favourite</th></tr></thead> : null}
-                    {favUsers && favUsers.length > 0 ? favUsers.map((data, index) => (
-                        <tbody key={index} id={data.id} className="user-list-item">
-                            <tr>
-                                <td>{data.id}</td>
-                                <td>{data.userId}</td>
-                                <td>{data.title}</td>
-                                <td>{data.body}</td>
-                                <td><FavouriteToggle onChange={this.handleFavourite} userData={data} /></td>
-                            </tr>
-                        </tbody>
-                    )) : null}
-                </table>
+                <Container>
+                    <div className="cards">
+                        {favUsers && favUsers.length > 0 ? favUsers.map((data, index) => (
+                            <div className="card" key={index}>
+                                <Container className="card-title">
+                                    <Row>
+                                        <Col>
+                                            <span className="lineh30">ID: {data.id}</span>
+                                            {/* <span>UID: 1</span> */}
+                                        </Col>
+                                        <Col className="text-right">
+                                            <FavouriteToggle userList="true" onChange={this.handleFavourite} userData={data} />
+                                        </Col>
+                                    </Row>
+                                </Container>
+                                <p className="card-header">Title: {data.title}</p>
+                                <span className="card-summary">Body: {data.body}</span>
+                                <span className="card-meta">
+                                    ID: {data.id}, User ID: {data.userId}
+                                </span>
+                            </div>
+                        )) : null}
+
+                    </div>
+                </Container>
                 {error && <div style={{ color: '#900' }}>{error}</div>}
                 {isLoading && <div className="loading-container">
                     <img alt="loading" src={require('../images/loadMore.gif')}></img>

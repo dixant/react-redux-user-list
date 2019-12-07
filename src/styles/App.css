@@ -36,6 +36,7 @@ code {
   display: inline-block;
   width: 60px;
   height: 34px;
+  margin: 0;
 }
 
 .switch input {
@@ -190,6 +191,7 @@ nav {
   display: flex !important;
   -ms-flex-preferred-size: auto;
   flex-basis: auto;
+  flex-grow: inherit;
 }
 
 .navbar-nav {
@@ -213,3 +215,10 @@ nav {
 .nav-link:hover+.dropdown-menu {
   display: flex;
 }
+
+
+
+
+
+
+
