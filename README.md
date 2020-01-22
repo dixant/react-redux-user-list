@@ -29,5 +29,7 @@ Runs on port 3000 by default
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+### 'https://react-redux-user-list.herokuapp.com/'
 
+Go to above link for the live app.
 
