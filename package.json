@@ -31,8 +31,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "json:server-dev": "json-server --watch -p 4000 db.json",
-    "json:server-prod": "json-server --watch http://react-redux-user-list.herokuapp.com/db.json",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run start"
+    "json:server-prod": "json-server http://react-redux-user-list.herokuapp.com/db.json",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=true npm install && npm run start"
   },
   "eslintConfig": {
     "extends": "react-app"
