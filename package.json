@@ -10,6 +10,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.8",
     "bootstrap": "^4.4.1",
+    "concurrently": "^5.0.2",
     "http-server": "^0.12.1",
     "jslint": "^0.12.1",
     "json-server": "^0.15.1",
@@ -25,13 +26,13 @@
   },
   "scripts": {
     "start-dev": "react-scripts start",
-    "start": "http-server ./build",
+    "start": "concurrently \"npm run json:server-prod\" \"http-server ./build\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "json:server-dev": "json-server --watch -p 4000 db.json",
-    "json:server-prod": "json-server http://react-redux-user-list.herokuapp.com/db.json",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build && npm run json:server-prod && npm run start"
+    "json:server-prod": "json-server --watch http://react-redux-user-list.herokuapp.com/db.json",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run start"
   },
   "eslintConfig": {
     "extends": "react-app"
